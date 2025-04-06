@@ -16,6 +16,7 @@ IMAGENS_PASSARO = [
 
 pygame.font.init()
 FONTE_PONTOS = pygame.font.SysFont("arial", 50)
+FONTE_CONTAGEM = pygame.font.SysFont("arial", 100)
 
 
 class Passaro:
@@ -163,7 +164,7 @@ class Chao:
         tela.blit(self.IMAGEM, (self.x2, self.y))
 
 
-def desenhar_tela(tela, passaros, tubos, chao, pontos):
+def desenhar_tela(tela, passaros, tubos, chao, pontos, contagem=None):
     tela.blit(IMAGEM_BACKGROUND, (0, 0))
     for passaro in passaros:
         passaro.desenhar(tela)
@@ -173,6 +174,13 @@ def desenhar_tela(tela, passaros, tubos, chao, pontos):
     texto = FONTE_PONTOS.render(f"Pontuação: {pontos}", 1, (255, 255, 255))
     tela.blit(texto, (TELA_LARGURA - 10 - texto.get_width(), 10))
     chao.desenhar(tela)
+    if contagem:
+        texto_contagem = FONTE_CONTAGEM.render(str(contagem), 1, (255, 255, 255))
+        tela.blit(
+            texto_contagem,
+            (TELA_LARGURA // 2 - texto_contagem.get_width() // 2, TELA_ALTURA // 2 - texto_contagem.get_height() // 2),
+        )
+        
     pygame.display.update()
 
 
@@ -183,6 +191,13 @@ def main():
     tela = pygame.display.set_mode((TELA_LARGURA, TELA_ALTURA))
     pontos = 0
     relogio = pygame.time.Clock()
+
+    # Temporizador de 5 segundos
+    contagem = 5
+    while contagem > 0:
+        relogio.tick(1) # 1 segundo por itereção
+        desenhar_tela(tela, passaros, tubos, chao, pontos, contagem)
+        contagem -=1
 
     rodando = True
     while rodando:
