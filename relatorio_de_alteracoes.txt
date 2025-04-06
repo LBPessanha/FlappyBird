@@ -1,0 +1,7 @@
+﻿Principais alterações:
+    06/04
+    • Importação de FONTE_CONTAGEM: Adicionado para exibir a contagem regressiva. 
+    • Modificação da função desenhar_tela(): Adicionado um parâmetro opcional contagem para exibir a contagem regressiva na tela. 
+    • Adição do loop de contagem regressiva na função main(): Um loop while é usado para exibir a contagem regressiva de 5 a 1 segundos antes de iniciar o jogo. 
+    Com essas alterações, o jogo agora exibirá uma contagem regressiva de 5 segundos antes de iniciar, dando ao jogador tempo para se preparar.
+
