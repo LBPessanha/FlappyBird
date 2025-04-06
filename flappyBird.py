@@ -5,17 +5,17 @@ import random
 TELA_LARGURA = 500
 TELA_ALTURA = 800
 
-IMAGEM_TUBO = pygame.transform.scale2x(pygame.image.load('imgs/pipe.png'))
-IMAGEM_CHAO = pygame.transform.scale2x(pygame.image.load('imgs/base.png'))
-IMAGEM_BACKGROUND = pygame.transform.scale2x(pygame.image.load('imgs/bg.png'))
+IMAGEM_TUBO = pygame.transform.scale2x(pygame.image.load("imgs/pipe.png"))
+IMAGEM_CHAO = pygame.transform.scale2x(pygame.image.load("imgs/base.png"))
+IMAGEM_BACKGROUND = pygame.transform.scale2x(pygame.image.load("imgs/bg.png"))
 IMAGENS_PASSARO = [
-    pygame.transform.scale2x(pygame.image.load('imgs/bird1.png')),
-    pygame.transform.scale2x(pygame.image.load('imgs/bird2.png')),
-    pygame.transform.scale2x(pygame.image.load('imgs/bird3.png')),
+    pygame.transform.scale2x(pygame.image.load("imgs/bird1.png")),
+    pygame.transform.scale2x(pygame.image.load("imgs/bird2.png")),
+    pygame.transform.scale2x(pygame.image.load("imgs/bird3.png")),
 ]
 
 pygame.font.init()
-FONTE_PONTOS = pygame.font.SysFont('arial', 50)
+FONTE_PONTOS = pygame.font.SysFont("arial", 50)
 
 
 class Passaro:
@@ -25,7 +25,11 @@ class Passaro:
     VELOCIDADE_ROTACAO = 20
     TEMPO_ANIMACAO = 5
 
-    def __init__(self, x, y,):
+    def __init__(
+        self,
+        x,
+        y,
+    ):
         self.x = x
         self.y = y
         self.angulo = 0
@@ -34,17 +38,17 @@ class Passaro:
         self.tempo = 0
         self.contagem_imagem = 0
         self.imagem = self.IMGS[0]
-    
+
     def pular(self):
         self.velocidade = -10.5
         self.tempo = 0
         self.altura = self.y
-    
+
     def mover(self):
         # Calcular o deslocamento
         self.tempo += 1
         deslocamento = 1.5 * (self.tempo**2) + self.velocidade * self.tempo
-    
+
         # Restringir o deslocamento
         if deslocamento > 16:
             deslocamento = 16
@@ -52,44 +56,45 @@ class Passaro:
             deslocamento -= 2
 
         self.y += deslocamento
-    
+
         # O ángulo do passaro
         if deslocamento < 0 or self.y < (self.altura + 50):
             if self.angulo < self.ROTACAO_MAXIMA:
                 self.angulo = self.ROTACAO_MAXIMA
-        else: 
+        else:
             if self.angulo > -90:
-                self.angulo -= self.VELOCIDADE_ROTACAO 
-    
+                self.angulo -= self.VELOCIDADE_ROTACAO
+
     def desenhar(self, tela):
         # definir qual imagem do pássaro vai usar
-        self.contagem_imagem +=1
+        self.contagem_imagem += 1
 
         if self.contagem_imagem < self.TEMPO_ANIMACAO:
             self.imagem = self.IMGS[0]
-        elif self.contagem_imagem < self.TEMPO_ANIMACAO*2:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO * 2:
             self.imagem = self.IMGS[1]
-        elif self.contagem_imagem < self.TEMPO_ANIMACAO*3:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO * 3:
             self.imagem = self.IMGS[2]
-        elif self.contagem_imagem < self.TEMPO_ANIMACAO*4:
+        elif self.contagem_imagem < self.TEMPO_ANIMACAO * 4:
             self.imagem = self.IMGS[1]
-        elif self.contagem_imagem >= self.TEMPO_ANIMACAO*4 +1:
+        elif self.contagem_imagem >= self.TEMPO_ANIMACAO * 4 + 1:
             self.imagem = self.IMGS[0]
             self.contagem_imagem = 0
 
         # se o pássaro tiver caindo eu não vou bater asa
         if self.angulo <= -80:
             self.imagem = self.IMGS[1]
-            self.contagem_imagem = self.TEMPO_ANIMACAO*2
-        
-        #desenhar a imagem
+            self.contagem_imagem = self.TEMPO_ANIMACAO * 2
+
+        # desenhar a imagem
         imagem_rotacionada = pygame.transform.rotate(self.imagem, self.angulo)
         pos_centro_imagem = self.imagem.get_rect(topleft=(self.x, self.y)).center
         retangulo = imagem_rotacionada.get_rect(center=pos_centro_imagem)
-        tela.blit (imagem_rotacionada, retangulo.topleft)  
+        tela.blit(imagem_rotacionada, retangulo.topleft)
 
     def get_mask(self):
         return pygame.mask.from_surface(self.imagem)
+
 
 class Tubo:
     DISTANCIA = 200
@@ -104,7 +109,7 @@ class Tubo:
         self.TUBO_BASE = IMAGEM_TUBO
         self.passou = False
         self.definir_altura()
-    
+
     def definir_altura(self):
         self.altura = random.randrange(50, 450)
         self.pos_topo = self.altura - self.TUBO_TOPO.get_height()
@@ -112,11 +117,11 @@ class Tubo:
 
     def mover(self):
         self.x -= self.VELOCIDADE
-    
+
     def desenhar(self, tela):
         tela.blit(self.TUBO_TOPO, (self.x, self.pos_topo))
         tela.blit(self.TUBO_BASE, (self.x, self.pos_base))
-    
+
     def colidir(self, passaro):
         passaro_mask = passaro.get_mask()
         topo_mask = pygame.mask.from_surface(self.TUBO_TOPO)
@@ -143,7 +148,7 @@ class Chao:
         self.y = y
         self.x1 = 0
         self.x2 = self.LARGURA
-    
+
     def mover(self):
         self.x1 -= self.VELOCIDADE
         self.x2 -= self.VELOCIDADE
@@ -152,10 +157,11 @@ class Chao:
             self.x1 = self.x2 + self.LARGURA
         if self.x2 + self.LARGURA < 0:
             self.x2 = self.x1 + self.LARGURA
-        
+
     def desenhar(self, tela):
         tela.blit(self.IMAGEM, (self.x1, self.y))
         tela.blit(self.IMAGEM, (self.x2, self.y))
+
 
 def desenhar_tela(tela, passaros, tubos, chao, pontos):
     tela.blit(IMAGEM_BACKGROUND, (0, 0))
@@ -163,11 +169,12 @@ def desenhar_tela(tela, passaros, tubos, chao, pontos):
         passaro.desenhar(tela)
     for tubo in tubos:
         tubo.desenhar(tela)
-    
+
     texto = FONTE_PONTOS.render(f"Pontuação: {pontos}", 1, (255, 255, 255))
     tela.blit(texto, (TELA_LARGURA - 10 - texto.get_width(), 10))
     chao.desenhar(tela)
     pygame.display.update()
+
 
 def main():
     passaros = [Passaro(230, 350)]
@@ -208,8 +215,8 @@ def main():
                     adicionar_tubo = True
             tubo.mover()
             if tubo.x + tubo.TUBO_TOPO.get_width() < 0:
-               remover_tubos.append(tubo)
-        
+                remover_tubos.append(tubo)
+
         if adicionar_tubo:
             pontos += 1
             tubos.append(Tubo(600))
@@ -219,12 +226,12 @@ def main():
         for i, passaro in enumerate(passaros):
             if (passaro.y + passaro.imagem.get_height()) > chao.y or passaro.y < 0:
                 passaros.pop(i)
-        
+
         if not passaros:
             reinicar_jogo(passaros, tubos, chao, pontos)
 
-           
         desenhar_tela(tela, passaros, tubos, chao, pontos)
+
 
 def reinicar_jogo(passaros, tubos, chao, pontos):
     passaros.clear()
@@ -233,6 +240,7 @@ def reinicar_jogo(passaros, tubos, chao, pontos):
     tubos.append(Tubo(700))
     chao.y = 730
     pontos = 0
- 
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     main()
