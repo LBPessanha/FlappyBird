@@ -5,13 +5,13 @@ import random
 TELA_LARGURA = 500
 TELA_ALTURA = 800
 
-IMAGEM_TUBO = pygame.transform.scale2x(pygame.image.load('/home/llpb/LLBPDesk/DEV/Programas/FlappyBird/imgs/pipe.png'))
-IMAGEM_CHAO = pygame.transform.scale2x(pygame.image.load('/home/llpb/LLBPDesk/DEV/Programas/FlappyBird/imgs/base.png'))
-IMAGEM_BACKGROUND = pygame.transform.scale2x(pygame.image.load('/home/llpb/LLBPDesk/DEV/Programas/FlappyBird/imgs/bg.png'))
+IMAGEM_TUBO = pygame.transform.scale2x(pygame.image.load('imgs/pipe.png'))
+IMAGEM_CHAO = pygame.transform.scale2x(pygame.image.load('imgs/base.png'))
+IMAGEM_BACKGROUND = pygame.transform.scale2x(pygame.image.load('imgs/bg.png'))
 IMAGENS_PASSARO = [
-    pygame.transform.scale2x(pygame.image.load('/home/llpb/LLBPDesk/DEV/Programas/FlappyBird/imgs/bird1.png')),
-    pygame.transform.scale2x(pygame.image.load('/home/llpb/LLBPDesk/DEV/Programas/FlappyBird/imgs/bird2.png')),
-    pygame.transform.scale2x(pygame.image.load('/home/llpb/LLBPDesk/DEV/Programas/FlappyBird/imgs/bird3.png')),
+    pygame.transform.scale2x(pygame.image.load('imgs/bird1.png')),
+    pygame.transform.scale2x(pygame.image.load('imgs/bird2.png')),
+    pygame.transform.scale2x(pygame.image.load('imgs/bird3.png')),
 ]
 
 pygame.font.init()
