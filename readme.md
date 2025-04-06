@@ -1,4 +1,5 @@
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
 # Flappy Bird Clone
 
 Este é um clone simples do jogo Flappy Bird, desenvolvido em Python utilizando a biblioteca `pygame`. O objetivo do jogo é controlar o pássaro para que ele passe pelos tubos sem colidir.
