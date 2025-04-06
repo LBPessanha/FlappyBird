@@ -1,6 +1,7 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/47f911bfe6f54451a6ef3926e5cc9c3d)](https://app.codacy.com/gh/92username/FlappyBird/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/47f911bfe6f54451a6ef3926e5cc9c3d)](https://app.codacy.com/gh/92username/FlappyBird/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) ![Built with Pygame](https://img.shields.io/badge/Built%20with-Pygame-306998?logo=python&logoColor=white)
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
+
 
 # Flappy Bird Clone
 
